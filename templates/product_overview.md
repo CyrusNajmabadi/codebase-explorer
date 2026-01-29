@@ -123,6 +123,17 @@ For detailed architecture, see [Codebase Overview](./codebase_overview.md).
 - [Codebase Overview](./codebase_overview.md) — Technical architecture and components
 - [Main Overview](../[main_overview].md) — Full codebase map
 - [Glossary](../glossary.md) — Terminology
+- [Existing docs in codebase] — [Link to any README or docs that exist for this area]
+
+---
+
+## Documentation Scope
+
+This document explains *why* [AREA_NAME] exists and what problems it solves. It provides context for understanding
+the area's purpose but does not cover implementation details.
+
+**To go deeper:** See [Codebase Overview](./codebase_overview.md) for architecture, or ask for detailed documentation
+on specific components or flows.
 ```
 
 ---
@@ -135,7 +146,7 @@ For detailed architecture, see [Codebase Overview](./codebase_overview.md).
 
 3. **Show what goes wrong** — Describe the actual failure modes developers encounter
 
-4. **Keep it professional** — Factual and direct. Avoid hyperbole or scare tactics.
+4. **Keep it professional** — Factual and direct. Avoid hyperbole, emotional language, or scare tactics.
 
 5. **Ground in real problems** — "Data is spread across three systems" > "data discovery challenges"
 
@@ -144,6 +155,8 @@ For detailed architecture, see [Codebase Overview](./codebase_overview.md).
 7. **Include concrete numbers** — "50 TB", "45 minutes", "3 retries" make it tangible
 
 8. **Connect to outcomes** — What does success look like in practice?
+
+9. **Link to existing docs** — If the codebase has documentation for this area, reference it.
 
 ---
 

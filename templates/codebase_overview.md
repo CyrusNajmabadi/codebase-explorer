@@ -21,21 +21,20 @@ For product context, see [product_overview.md](./product_overview.md). See [../g
 [Start with a diagram showing the major components and their relationships]
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                            [TOP_LAYER]                                  │
-└────────────────────────────────┬────────────────────────────────────────┘
-                                 │
-    ┌────────────────────────────┼────────────────────────────────────────┐
-    ▼                            ▼                                        ▼
-┌─────────────────┐    ┌──────────────────────┐            ┌──────────────────┐
-│  [COMPONENT_1]  │    │    [COMPONENT_2]     │            │   [COMPONENT_3]  │
-│  [Brief desc]   │    │    [Brief desc]      │            │   [Brief desc]   │
-└─────────────────┘    └──────────────────────┘            └──────────────────┘
-                                 │
-                                 ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           [BOTTOM_LAYER]                                │
-└─────────────────────────────────────────────────────────────────────────┘
+                        ┌───────────────────┐
+                        │    [TOP_LAYER]    │
+                        └─────────┬─────────┘
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          ▼                       ▼                       ▼
+   ┌─────────────┐         ┌─────────────┐         ┌─────────────┐
+   │ COMPONENT_1 │         │ COMPONENT_2 │         │ COMPONENT_3 │
+   └─────────────┘         └──────┬──────┘         └─────────────┘
+                                  │
+                                  ▼
+                       ┌────────────────────┐
+                       │   [BOTTOM_LAYER]   │
+                       └────────────────────┘
 ```
 
 [2-3 paragraphs explaining the architecture at a high level:]
@@ -208,6 +207,22 @@ See also: [../glossary.md](../glossary.md)
 - [Product Overview](./product_overview.md)
 - [Glossary](../glossary.md)
 - [Main Overview](../[main_overview].md)
+
+---
+
+## Documentation Scope
+
+This document provides a high-level architectural overview of [AREA_NAME]. It covers major components and their
+interactions but does not detail internal implementation of each component.
+
+**What's covered:** Architecture, component responsibilities, key patterns, technology choices
+
+**What's not covered:** Detailed implementation, edge cases, performance tuning, all configuration options
+
+**To go deeper:** Ask for detailed documentation on specific components (e.g., "Explain the [COMPONENT] in detail")
+or specific flows (e.g., "Trace a [OPERATION] through the system").
+
+**Existing documentation:** [Link to any existing docs in the codebase that cover this area]
 ```
 
 ---
@@ -228,15 +243,21 @@ See also: [../glossary.md](../glossary.md)
 
 7. **Document internal names prominently** — These are the vocabulary for reading code
 
+8. **Keep tone professional and factual** — Avoid editorializing ("elegant", "powerful", "seamlessly"). State what
+   things do, not how impressive they are.
+
+9. **Link to existing codebase docs** — If the codebase has its own documentation for this area, link to it rather
+   than duplicating.
+
 ---
 
 ## Diagram Tips
 
 **ASCII diagrams** work well and render everywhere:
 ```
-┌───────┐     ┌───────┐
-│   A   │────▶│   B   │
-└───────┘     └───────┘
+┌─────┐     ┌─────┐
+│  A  │────▶│  B  │
+└─────┘     └─────┘
 ```
 
 **Mermaid diagrams** are richer but need renderer support:

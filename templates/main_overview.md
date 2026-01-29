@@ -122,6 +122,31 @@ This template provides the structure for the entry-point document that maps the 
 - [Technology Mapping](./technology_mapping.md) — What tech is used where
 - [Build System](./build_system/overview.md) — How code is built (if applicable)
 - [Test Infrastructure](./test_infrastructure/overview.md) — How code is tested (if applicable)
+
+---
+
+## Existing Codebase Documentation
+
+[Link to documentation that exists in the codebase itself]
+
+- [Main README](link) — Project overview from maintainers
+- [docs/ folder](link) — Official documentation
+- [Architecture docs](link) — If they exist
+- [Contributing guide](link) — Development setup
+
+---
+
+## Documentation Scope
+
+This documentation provides a high-level map of the codebase. Individual area documents cover architecture and
+purpose but do not exhaustively document implementation details.
+
+**To expand coverage:** Ask the AI agent to drill into specific areas. For example:
+- "Explain the [COMPONENT] in detail"
+- "Trace a [OPERATION] through the system"
+- "Document the [SUBSYSTEM] at a lower level"
+
+New detailed documentation will link back to these overview documents.
 ```
 
 ---

@@ -71,6 +71,50 @@ This methodology assumes the AI agent can:
    understand them rather than guessing. This ensures accurate documentation and helps you recognize how standard
    tools are being used (or customized) in this codebase.
 
+8. **Find and reference existing docs.** Before writing, check for existing documentation in the codebase (README
+   files, doc/ folders, wikis, inline comments). Reference and link to these rather than duplicating. Your docs
+   should complement what exists, not replace it.
+
+### Tone and Style
+
+Documentation should be **clear, professional, and factual**. Avoid language that feels like marketing copy or
+AI-generated fluff.
+
+**Do:**
+- State facts directly: "The parser converts source text to syntax trees."
+- Use neutral language: "This approach has trade-offs..." 
+- Be specific: "Processes approximately 10,000 files" not "handles massive scale"
+- Acknowledge limitations: "This overview covers the main components; see [link] for details."
+
+**Don't:**
+- Use emotional language: "painful", "exciting", "revolutionary", "game-changing"
+- Exaggerate: "blazingly fast", "incredibly powerful", "seamless"
+- Use filler phrases: "It's worth noting that...", "Interestingly enough..."
+- Be dramatic: "When disaster strikes...", "The moment of truth..."
+- Use second-person dramatically: "You're frantically searching..." (factual "you" is fine)
+
+**Examples:**
+
+| Instead of | Write |
+|------------|-------|
+| "This solves the painful problem of..." | "This addresses the problem of..." |
+| "The elegant solution handles..." | "The solution handles..." |
+| "You'll love how it seamlessly..." | "It integrates with..." |
+| "The incredibly powerful engine..." | "The engine supports..." |
+| "When things go wrong, chaos ensues" | "When errors occur, the system..." |
+
+### Diagrams
+
+ASCII diagrams are useful but difficult to align correctly. Keep them simple:
+
+- Use basic box characters: `┌ ┐ └ ┘ │ ─ ├ ┤ ┬ ┴ ┼`
+- Prefer simple arrows: `→ ← ↓ ↑ ▶ ▼`
+- Keep boxes short (avoid long text that causes alignment issues)
+- When in doubt, use a simpler diagram or describe the flow in text
+- If a diagram looks misaligned, simplify it rather than trying to fix alignment
+
+Simple and correct is better than complex and broken.
+
 ---
 
 ## Phase 1: Initial Assessment
@@ -391,20 +435,45 @@ Agent should:
 4. Update existing docs to link to new detailed docs
 ```
 
-### Structuring Docs for Later Expansion
+### Marking Documentation as Incomplete
 
-**In high-level docs, include:**
-- "This section covers [X] at a high level. For implementation details, see [link]." (placeholder for future)
-- Clear boundaries: "The auth system includes token management, session handling, and SSO integration."
-- Named subsystems that can become their own docs later
+High-level documentation should clearly state its scope and limitations. Include a notice like:
+
+```markdown
+---
+
+**Documentation Scope:** This document provides a high-level overview of [AREA]. It covers architecture and major
+components but does not detail internal implementation. For deeper exploration of specific components, see the
+[Incremental Documentation Guide](./README.md#expanding-documentation) or ask the AI agent to drill into a
+specific area.
+
+---
+```
+
+### Linking Between Levels
+
+**High-level docs should:**
+- State explicitly what they cover and what they don't
+- Link to detailed docs where they exist
+- Note areas that could be expanded (even without existing docs)
+- Reference the methodology for how to request deeper documentation
+
+**Detailed/drill-in docs should:**
+- Link back to their parent high-level doc: "This expands on the Parser section of [Compiler Overview](../compiler_overview.md)"
+- State their scope: "This document covers the Lexer component in detail"
+- Link to sibling docs at the same level: "See also: [Binder Details](./binder.md), [Checker Details](./checker.md)"
 
 **Cross-reference pattern:**
 ```
 Main Overview
-├── links to → Area Product Overview
-│   └── links to → Area Codebase Overview
-│       └── links to → Component Detail Doc (created later)
-│           └── links to → Flow Doc (created later)
+    ↓ links to
+Area Product Overview ← "For high-level context, see Main Overview"
+    ↓ links to
+Area Codebase Overview ← "Part of [Area] documentation"
+    ↓ links to (when created)
+Component Detail Doc ← "This expands on [Section] from Codebase Overview"
+    ↓ links to (when created)
+Flow Doc ← "This details [Operation] within [Component]"
 ```
 
 ### Starting a "Drill Deeper" Session

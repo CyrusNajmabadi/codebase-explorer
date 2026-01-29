@@ -284,6 +284,19 @@ compiled IL", "a click event from UI to state update"]
 - [Component A Overview](./[link].md)
 - [Component B Overview](./[link].md)
 - [Main Overview](./[main_overview].md)
+
+---
+
+## Documentation Scope
+
+**This document expands on:** [Link to parent doc, e.g., "the Parser section of [Compiler Overview](../compiler.md)"]
+
+**Scope:** This flow covers [SPECIFIC_OPERATION] at [LEVEL] detail. It traces [WHAT] but does not cover [WHAT_NOT].
+
+**To go deeper:** For more detail on specific steps, ask for expanded documentation (e.g., "Detail Step 3 of this
+flow").
+
+**To zoom out:** See [PARENT_DOC] for how this flow fits into the larger system.
 ```
 
 ---

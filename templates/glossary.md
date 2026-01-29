@@ -9,7 +9,10 @@ This template provides the structure for documenting internal terminology, coden
 ```markdown
 # [CODEBASE_NAME] Glossary
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
 
 This glossary defines internal terminology, codenames, and acronyms used throughout the codebase. Terms are organized
 alphabetically within categories.

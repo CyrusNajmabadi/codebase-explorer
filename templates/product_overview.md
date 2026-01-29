@@ -10,7 +10,11 @@ differentiator is the **story walkthrough** that opens the document.
 ```markdown
 # [AREA_NAME]: Product Overview
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
+| **Parent Doc** | [Main Overview](../[main_overview].md) |
 
 ## The Story: [DESCRIPTIVE_TITLE]
 

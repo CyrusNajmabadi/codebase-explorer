@@ -9,7 +9,13 @@ This template provides the structure for the entry-point document that maps the 
 ```markdown
 # [CODEBASE_NAME] Codebase Overview
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
+| **Repository** | [REPO_URL] |
+| **Methodology** | [Codebase Explorer]([METHODOLOGY_URL]) |
+
 **Purpose:** High-level map of the [CODEBASE_NAME] codebase for engineers new to the project
 
 ---

@@ -9,7 +9,10 @@ This template provides the structure for documenting which technologies are used
 ```markdown
 # [CODEBASE_NAME] Technology Mapping
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
 
 This document maps technologies to their usage across the codebase. Use it to answer "where is X used?" and "what
 tech does Y use?"

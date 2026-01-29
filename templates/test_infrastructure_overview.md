@@ -10,7 +10,10 @@ infrastructure.
 ```markdown
 # [CODEBASE_NAME] Test Infrastructure Overview
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
 
 This document explains how code is tested in the [CODEBASE_NAME] codebase, including test types, frameworks, and
 best practices.

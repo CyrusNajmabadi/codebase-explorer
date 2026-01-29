@@ -21,7 +21,10 @@ services, libraries, assemblies, packages, or any major unit of organization.
 ```markdown
 # [CODEBASE_NAME] Component Catalog
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
 
 Quick reference for all major components in the codebase. For detailed architecture, see individual area documentation.
 
@@ -101,9 +104,9 @@ Quick reference for all major components in the codebase. For detailed architect
                    │
     ┌──────────────┼──────────────┐
     ▼              ▼              ▼
-┌───────┐      ┌───────┐      ┌───────┐
-│ SVC_A │      │ SVC_B │      │ SVC_C │
-└───────┘      └───────┘      └───────┘
+┌───────┐    ┌───────┐    ┌───────┐
+│ SVC_A │    │ SVC_B │    │ SVC_C │
+└───────┘    └───────┘    └───────┘
 ```
 
 ---

@@ -67,8 +67,10 @@ Specifically, fetch:
 
 Then:
 1. Read the existing documentation at: [PATH_TO_DOCS_FOLDER]
-2. Start with the Main Overview and Glossary to understand what's already documented
-3. I'd like to drill deeper into: [SPECIFIC_AREA - e.g., "the parser component" or "authentication flow"]
+2. Note the Git SHA recorded in the existing docs
+3. Check what changed in the codebase since the docs were generated (if this is a git repo)
+4. Start with the Main Overview and Glossary to understand what's already documented
+5. I'd like to drill deeper into: [SPECIFIC_AREA - e.g., "the parser component" or "authentication flow"]
 
 Please create detailed documentation for that area, linking back to the existing high-level docs.
 ```
@@ -76,11 +78,17 @@ Please create detailed documentation for that area, linking back to the existing
 ### What the Agent Should Do
 
 1. Fetch and read the methodology (README.md) and templates
-2. Read existing documentation to understand current state
-3. Explore the specified area in more depth than the initial pass
-4. Create detailed documentation following the same methodology
-5. Update existing docs with links to the new detailed docs
-6. Ensure new docs link back to their parent high-level docs
+2. Read existing documentation to understand current state and **note the Git SHA recorded in the docs**
+3. **Check what changed since last documentation** (if git repo):
+   - Get current SHA: `git rev-parse HEAD`
+   - Compare to SHA in docs: `git diff --stat OLD_SHA..HEAD -- path/to/area/`
+   - Focus updates on areas with significant changes
+   - If the entire area being documented has changed significantly, note this in the new docs
+4. Explore the specified area in more depth than the initial pass
+5. Create detailed documentation following the same methodology
+6. Update existing docs with links to the new detailed docs
+7. Ensure new docs link back to their parent high-level docs
+8. **Record the new Git SHA** in all new/updated documents
 
 ---
 

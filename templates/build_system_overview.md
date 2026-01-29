@@ -10,7 +10,10 @@ workflows.
 ```markdown
 # [CODEBASE_NAME] Build System Overview
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
 
 This document explains how code is built, tested, and deployed in the [CODEBASE_NAME] codebase.
 

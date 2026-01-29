@@ -10,7 +10,11 @@ patterns, and implementation details.
 ```markdown
 # [AREA_NAME]: Codebase Overview
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
+| **Parent Doc** | [Main Overview](../[main_overview].md) |
 
 For product context, see [product_overview.md](./product_overview.md). See [../glossary.md](../glossary.md) for terms.
 

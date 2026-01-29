@@ -69,7 +69,12 @@ Lexer: Character Stream → Token Recognition → Trivia Handling → Token Crea
 ```markdown
 # [FLOW_TYPE] Flow: [FLOW_NAME]
 
-**Last Updated:** [DATE]
+| | |
+|---|---|
+| **Last Updated** | [DATE] |
+| **Git SHA** | `[COMMIT_SHA]` |
+| **Parent Doc** | [Link to parent codebase or area overview] |
+| **Level** | [System-wide / Phase / Component] |
 
 This document traces [WHAT_IS_BEING_TRACED] through the system, showing which components are involved and how they
 interact.

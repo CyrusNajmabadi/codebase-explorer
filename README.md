@@ -75,6 +75,10 @@ This methodology assumes the AI agent can:
    files, doc/ folders, wikis, inline comments). Reference and link to these rather than duplicating. Your docs
    should complement what exists, not replace it.
 
+9. **Track version information.** If the codebase is a git repository, record the commit SHA when generating docs.
+   This enables incremental updates—when revisiting docs, you can diff what changed since the last documentation
+   pass and focus updates on modified areas.
+
 ### Tone and Style
 
 Documentation should be **clear, professional, and factual**. Avoid language that feels like marketing copy or
@@ -405,6 +409,9 @@ Create the foundation:
 - Product Overviews for major areas (why they exist)
 - High-level Codebase Overviews (architecture, not implementation details)
 
+**Record version information:** If this is a git repository, record the current commit SHA. Include this in each
+generated document's metadata section (see templates). This enables incremental updates later.
+
 **Leave expansion points:** When you identify areas that deserve more detail, note them explicitly:
 - "For detailed compilation flow, see [Compilation Flow](./flows/compilation.md)" (even if that doc doesn't exist yet)
 - Include a "## Areas for Future Documentation" section listing what could be expanded
@@ -484,13 +491,19 @@ the agent loads the methodology and templates before expanding existing docs.
 When you (the agent) receive such a request:
 
 1. **Fetch the methodology** — Load README.md and templates from the methodology repo
-2. **Read the existing Main Overview** — Understand the current documentation structure
-3. **Check what exists** — List the documentation directory to see what's documented
-4. **Read relevant existing docs** — Before exploring code, understand what's already captured
-5. **Ask clarifying questions if needed** — "Which specific aspect of [AREA] would you like me to detail?"
-6. **Explore and expand** — Go deeper on the requested area
-7. **Maintain consistency** — Use the same terminology, structure, and style as existing docs
-8. **Update links** — Add links from parent docs to new detailed docs, and vice versa
+2. **Read the existing Main Overview** — Understand the current documentation structure and note the git SHA
+3. **Check what changed (if git repo):**
+   - Get the current git SHA: `git rev-parse HEAD`
+   - Compare to the SHA recorded in existing docs
+   - If different, check what changed: `git diff --stat OLD_SHA..HEAD -- path/to/area/`
+   - Focus documentation updates on modified files/areas
+4. **Check what exists** — List the documentation directory to see what's documented
+5. **Read relevant existing docs** — Before exploring code, understand what's already captured
+6. **Ask clarifying questions if needed** — "Which specific aspect of [AREA] would you like me to detail?"
+7. **Explore and expand** — Go deeper on the requested area, prioritizing changed code if updating
+8. **Maintain consistency** — Use the same terminology, structure, and style as existing docs
+9. **Update links** — Add links from parent docs to new detailed docs, and vice versa
+10. **Update version metadata** — Record the new git SHA in updated/new docs
 
 ### What Generated Docs Must Include
 

@@ -141,12 +141,18 @@ This template provides the structure for the entry-point document that maps the 
 This documentation provides a high-level map of the codebase. Individual area documents cover architecture and
 purpose but do not exhaustively document implementation details.
 
-**To expand coverage:** Ask the AI agent to drill into specific areas. For example:
-- "Explain the [COMPONENT] in detail"
+**To expand coverage:** Start a new AI session using the
+[Expanding Documentation Prompt]([METHODOLOGY_URL]/blob/main/LOADER.md#expanding-documentation-prompt).
+
+Example areas to expand:
+- "Drill deeper into the [COMPONENT]"
 - "Trace a [OPERATION] through the system"
-- "Document the [SUBSYSTEM] at a lower level"
+- "Document the [SUBSYSTEM] internals"
 
 New detailed documentation will link back to these overview documents.
+
+**Methodology:** This documentation was created using the
+[Codebase Explorer methodology]([METHODOLOGY_URL]).
 ```
 
 ---

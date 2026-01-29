@@ -293,10 +293,13 @@ compiled IL", "a click event from UI to state update"]
 
 **Scope:** This flow covers [SPECIFIC_OPERATION] at [LEVEL] detail. It traces [WHAT] but does not cover [WHAT_NOT].
 
-**To go deeper:** For more detail on specific steps, ask for expanded documentation (e.g., "Detail Step 3 of this
-flow").
+**To go deeper:** Start a new AI session using the
+[Expanding Documentation Prompt]([METHODOLOGY_URL]/blob/main/LOADER.md#expanding-documentation-prompt), asking to
+detail specific steps of this flow.
 
 **To zoom out:** See [PARENT_DOC] for how this flow fits into the larger system.
+
+**Methodology:** This documentation follows the [Codebase Explorer methodology]([METHODOLOGY_URL]).
 ```
 
 ---

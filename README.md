@@ -478,14 +478,36 @@ Flow Doc ← "This details [Operation] within [Component]"
 
 ### Starting a "Drill Deeper" Session
 
-When beginning work on a codebase that already has AI-generated documentation:
+Users should start a drill-in session using the **Expanding Documentation Prompt** from `LOADER.md`. This ensures
+the agent loads the methodology and templates before expanding existing docs.
 
-1. **Read the existing Main Overview** — Understand the current documentation structure
-2. **Check what exists** — List the documentation directory to see what's documented
-3. **Ask the user** — "I see documentation exists for [areas]. Which area would you like me to expand?"
+When you (the agent) receive such a request:
+
+1. **Fetch the methodology** — Load README.md and templates from the methodology repo
+2. **Read the existing Main Overview** — Understand the current documentation structure
+3. **Check what exists** — List the documentation directory to see what's documented
 4. **Read relevant existing docs** — Before exploring code, understand what's already captured
-5. **Explore and expand** — Go deeper on the requested area
-6. **Maintain consistency** — Use the same terminology, structure, and style as existing docs
+5. **Ask clarifying questions if needed** — "Which specific aspect of [AREA] would you like me to detail?"
+6. **Explore and expand** — Go deeper on the requested area
+7. **Maintain consistency** — Use the same terminology, structure, and style as existing docs
+8. **Update links** — Add links from parent docs to new detailed docs, and vice versa
+
+### What Generated Docs Must Include
+
+Generated documentation should be **self-documenting** about how to expand it. Every generated doc should include:
+
+1. **Methodology reference** — Link to the GitHub repo containing this methodology
+2. **LOADER.md reference** — Link specifically to LOADER.md#expanding-documentation-prompt
+3. **Scope statement** — What this doc covers and what it doesn't
+4. **Parent/child links** — Links up to parent docs and down to detailed docs (where they exist)
+
+The templates include `[METHODOLOGY_URL]` placeholders. When generating docs, replace these with the actual URL
+to the methodology repo (provided by the user in the initial prompt).
+
+This ensures that anyone reading the generated docs knows:
+- That this is AI-generated documentation following a specific methodology
+- How to request more detailed documentation
+- What prompt to use to start a drill-in session
 
 ---
 
@@ -528,13 +550,15 @@ Every documentation set should include:
 
 When a user asks you to explore a codebase:
 
-1. **Fetch templates** from this repo's `/templates` folder
-2. **Run initial assessment** (Phase 1)
-3. **Ask clarifying questions** if needed
-4. **Launch parallel exploration** (Phase 2)
-5. **Synthesize and document** (Phase 3)
-6. **Verify** (Phase 4)
-7. **Deliver** with a summary of what you created
+1. **Fetch methodology files** — README.md, LOADER.md, and all templates from `/templates`
+2. **Note the methodology URL** — The user should provide this; you'll include it in generated docs so users know
+   how to expand documentation later
+3. **Run initial assessment** (Phase 1)
+4. **Ask clarifying questions** if needed
+5. **Launch parallel exploration** (Phase 2)
+6. **Synthesize and document** (Phase 3) — Replace `[METHODOLOGY_URL]` placeholders with the actual URL
+7. **Verify** (Phase 4)
+8. **Deliver** with a summary of what you created and how to expand it
 
 ---
 

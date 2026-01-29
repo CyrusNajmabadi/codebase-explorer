@@ -219,10 +219,13 @@ interactions but does not detail internal implementation of each component.
 
 **What's not covered:** Detailed implementation, edge cases, performance tuning, all configuration options
 
-**To go deeper:** Ask for detailed documentation on specific components (e.g., "Explain the [COMPONENT] in detail")
-or specific flows (e.g., "Trace a [OPERATION] through the system").
+**To go deeper:** Start a new AI session using the
+[Expanding Documentation Prompt]([METHODOLOGY_URL]/blob/main/LOADER.md#expanding-documentation-prompt), asking to
+drill into specific components or flows within this area.
 
-**Existing documentation:** [Link to any existing docs in the codebase that cover this area]
+**Existing codebase documentation:** [Link to any existing docs in the codebase that cover this area]
+
+**Parent document:** [Link to Main Overview or parent area doc]
 ```
 
 ---

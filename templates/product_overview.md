@@ -132,8 +132,11 @@ For detailed architecture, see [Codebase Overview](./codebase_overview.md).
 This document explains *why* [AREA_NAME] exists and what problems it solves. It provides context for understanding
 the area's purpose but does not cover implementation details.
 
-**To go deeper:** See [Codebase Overview](./codebase_overview.md) for architecture, or ask for detailed documentation
-on specific components or flows.
+**To go deeper:** See [Codebase Overview](./codebase_overview.md) for architecture. For even more detail, start a
+new AI session using the
+[Expanding Documentation Prompt]([METHODOLOGY_URL]/blob/main/LOADER.md#expanding-documentation-prompt).
+
+**Parent document:** [Main Overview](../[main_overview].md)
 ```
 
 ---

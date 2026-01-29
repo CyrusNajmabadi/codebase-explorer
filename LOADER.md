@@ -88,5 +88,6 @@ This methodology works best with AI agents that can:
 - **Execute commands** (optional, for build system exploration)
 - **Parallel execution** (optional but faster, for exploring multiple areas simultaneously)
 - **Fetch URLs** (optional, for loading templates from GitHub)
+- **Web search** (optional, for looking up unfamiliar technologies and frameworks)
 
 Most modern AI coding assistants (in IDEs or standalone) support these capabilities.

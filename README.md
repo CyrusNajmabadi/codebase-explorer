@@ -22,6 +22,7 @@ This methodology assumes the AI agent can:
 - **Parallel execution** — Explore multiple areas simultaneously (faster, not required)
 - **Execute shell commands** — Useful for build system exploration
 - **Fetch URLs** — Load templates from GitHub instead of pasting
+- **Web search** — Look up unfamiliar technologies, frameworks, or patterns
 
 ### Adapting to Your AI's Capabilities
 
@@ -65,6 +66,10 @@ This methodology assumes the AI agent can:
 
 6. **Verify, don't hallucinate.** When uncertain, say so. When making inferences, label them. Better to leave gaps
    than fill them with plausible-sounding fiction.
+
+7. **Look things up.** When you encounter unfamiliar technologies, frameworks, or patterns, search the web to
+   understand them rather than guessing. This ensures accurate documentation and helps you recognize how standard
+   tools are being used (or customized) in this codebase.
 
 ---
 
@@ -165,6 +170,12 @@ Return:
 - Wait for results before launching next batch
 - Collect all findings before writing documentation
 - If parallelization isn't available, explore areas sequentially—it takes longer but works fine
+
+**When to search the web:**
+- You encounter a framework, library, or tool you're unfamiliar with
+- You see patterns or conventions that might be standard practices for a technology
+- You need to verify how a technology is typically used vs. how it's used here
+- You want to link to official documentation for external technologies
 
 ### Step 2.3: Synthesis
 

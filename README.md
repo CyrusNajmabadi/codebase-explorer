@@ -96,6 +96,7 @@ AI-generated fluff.
 - Use filler phrases: "It's worth noting that...", "Interestingly enough..."
 - Be dramatic: "When disaster strikes...", "The moment of truth..."
 - Use second-person dramatically: "You're frantically searching..." (factual "you" is fine)
+- Use fictional names for people or companies in examples — say "an engineer" or "a user", not "Sarah" or "Acme Corp"
 
 **Examples:**
 
@@ -106,18 +107,43 @@ AI-generated fluff.
 | "You'll love how it seamlessly..." | "It integrates with..." |
 | "The incredibly powerful engine..." | "The engine supports..." |
 | "When things go wrong, chaos ensues" | "When errors occur, the system..." |
+| "Sarah, a data engineer at Acme Corp..." | "A data engineer at a large company..." |
+| "When Alex needs to debug..." | "When an engineer needs to debug..." |
 
 ### Diagrams
 
-ASCII diagrams are useful but difficult to align correctly. Keep them simple:
+ASCII diagrams are useful but difficult to align correctly. AI models frequently misalign box edges. Follow these
+guidelines carefully:
 
-- Use basic box characters: `┌ ┐ └ ┘ │ ─ ├ ┤ ┬ ┴ ┼`
-- Prefer simple arrows: `→ ← ↓ ↑ ▶ ▼`
-- Keep boxes short (avoid long text that causes alignment issues)
-- When in doubt, use a simpler diagram or describe the flow in text
-- If a diagram looks misaligned, simplify it rather than trying to fix alignment
+**Characters to use:**
+- Box corners: `┌ ┐ └ ┘`
+- Box edges: `│` (vertical), `─` (horizontal)
+- Connectors: `├ ┤ ┬ ┴ ┼`
+- Arrows: `→ ← ↓ ↑ ▶ ▼`
 
-Simple and correct is better than complex and broken.
+**Rules for correct alignment:**
+1. **Count characters precisely** — Every row of a box must have the same width in characters
+2. **Use consistent box widths** — If a box is 15 characters wide at the top, it must be 15 at the bottom
+3. **Center text manually** — Count spaces on each side of text within a box
+4. **Test by visual inspection** — After generating, look at each box: do the corners line up vertically?
+
+**Common mistakes to avoid:**
+- Right edges of boxes landing on different columns (most common error)
+- Inconsistent spacing inside boxes
+- Arrows that don't connect to box edges
+- Mixing Unicode box characters with ASCII (`|` vs `│`, `-` vs `─`)
+
+**Strategy for complex diagrams:**
+1. Start with the simplest possible layout
+2. Use uniform box sizes when possible (easier to align)
+3. After generating, review each box corner — do `┌` and `└` align? Do `┐` and `┘` align?
+4. If alignment is off, simplify the diagram rather than trying to fix it
+
+**When in doubt:** Use bullet points or numbered lists instead of diagrams. A clear textual description is better
+than a broken diagram.
+
+**Self-review:** After generating any ASCII diagram, pause and verify alignment before continuing. If it looks
+wrong, regenerate with a simpler structure.
 
 ---
 

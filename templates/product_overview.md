@@ -147,7 +147,8 @@ new AI session using the
 
 ## Story Writing Tips
 
-1. **Be specific** — "A data engineer at an e-commerce company" is clearer than "a user"
+1. **Be specific about roles, not names** — "A data engineer at a large e-commerce company" is good. Do NOT use
+   fictional names like "Sarah" or fictional company names like "Acme Corp". Use generic descriptions instead.
 
 2. **Use realistic timelines** — "Week 1... Week 2... Month later" shows progression
 

@@ -1,6 +1,7 @@
 # Codebase Explorer: Deep-Dive Methodology for Complex Codebases
 
-**Purpose:** A systematic approach for understanding large, unfamiliar codebases. Designed for experienced developers who need to quickly build mental models of complex systems.
+**Purpose:** A systematic approach for understanding large, unfamiliar codebases. Designed for experienced developers
+who need to quickly build mental models of complex systems.
 
 **Target Audience:** You (the AI agent) helping a developer explore a new codebase.
 
@@ -46,17 +47,24 @@ This methodology assumes the AI agent can:
 
 ### Core Principles
 
-1. **Breadth before depth.** Understand the landscape before diving into details. A developer who knows "there are 12 major areas and here's what each does" is more effective than one who deeply understands 1 area but is lost everywhere else.
+1. **Breadth before depth.** Understand the landscape before diving into details. A developer who knows "there are
+   12 major areas and here's what each does" is more effective than one who deeply understands 1 area but is lost
+   everywhere else.
 
-2. **Progressive complexity.** Start accessible, go deep. Every document should be readable by someone unfamiliar with the codebase, then progressively reveal complexity.
+2. **Progressive complexity.** Start accessible, go deep. Every document should be readable by someone unfamiliar
+   with the codebase, then progressively reveal complexity.
 
-3. **Stories over specifications.** "Why does this exist?" is more valuable than "What are all its methods?" Lead with realistic scenarios that show purpose, then provide technical details.
+3. **Stories over specifications.** "Why does this exist?" is more valuable than "What are all its methods?" Lead
+   with realistic scenarios that show purpose, then provide technical details.
 
-4. **Internal names matter.** Every codebase has jargon, codenames, and acronyms. Capturing these is critical—they're the vocabulary needed to read the code and communicate with the team.
+4. **Internal names matter.** Every codebase has jargon, codenames, and acronyms. Capturing these is critical—they're
+   the vocabulary needed to read the code and communicate with the team.
 
-5. **Architecture over implementation.** Focus on how components interact, what design patterns are used, and why decisions were made. Line-by-line code details are less valuable than understanding the shape of the system.
+5. **Architecture over implementation.** Focus on how components interact, what design patterns are used, and why
+   decisions were made. Line-by-line code details are less valuable than understanding the shape of the system.
 
-6. **Verify, don't hallucinate.** When uncertain, say so. When making inferences, label them. Better to leave gaps than fill them with plausible-sounding fiction.
+6. **Verify, don't hallucinate.** When uncertain, say so. When making inferences, label them. Better to leave gaps
+   than fill them with plausible-sounding fiction.
 
 ---
 
@@ -87,12 +95,12 @@ Questions to answer:
 
 Determine the codebase's complexity:
 
-| Scale | Top-Level Dirs | Likely Approach |
-|-------|----------------|-----------------|
-| Small | < 10 | Explore each directly |
-| Medium | 10-50 | Group into 5-10 themes |
-| Large | 50-200 | Group into 10-15 areas, use parallel exploration |
-| Massive | 200+ | Hierarchical grouping, heavy parallelization |
+| Scale   | Top-Level Dirs | Likely Approach                                  |
+|---------|----------------|--------------------------------------------------|
+| Small   | < 10           | Explore each directly                            |
+| Medium  | 10-50          | Group into 5-10 themes                           |
+| Large   | 50-200         | Group into 10-15 areas, use parallel exploration |
+| Massive | 200+           | Hierarchical grouping, heavy parallelization     |
 
 ### Step 1.3: Ask Clarifying Questions
 
@@ -177,26 +185,26 @@ After all explorations complete:
 
 Generate these documents using the templates in the `/templates` folder:
 
-| Document | Purpose | When to Create |
-|----------|---------|----------------|
-| **Main Overview** | Entry point, map of everything | Always |
-| **Glossary** | Internal names, acronyms, jargon | Always |
-| **Technology Mapping** | What tech is used where | Always |
-| **Product Overview** | Why an area matters (with story) | Per major area |
-| **Codebase Overview** | How an area works (architecture) | Per major area |
-| **Build System Overview** | How code is built | If complex |
-| **Test Infrastructure Overview** | How code is tested | If complex |
-| **Component Catalog** | Quick reference for all components | If 20+ components |
-| **Request Flow** | Trace a request through the system | Optional, high value |
+| Document                        | Purpose                                  | When to Create       |
+|---------------------------------|------------------------------------------|----------------------|
+| **Main Overview**               | Entry point, map of everything           | Always               |
+| **Glossary**                    | Internal names, acronyms, jargon         | Always               |
+| **Technology Mapping**          | What tech is used where                  | Always               |
+| **Product Overview**            | Why an area matters (with story)         | Per major area       |
+| **Codebase Overview**           | How an area works (architecture)         | Per major area       |
+| **Build System Overview**       | How code is built                        | If complex           |
+| **Test Infrastructure Overview**| How code is tested                       | If complex           |
+| **Component Catalog**           | Quick reference for all components       | If 20+ components    |
+| **Request Flow**                | Trace a request through the system       | Optional, high value |
 
 ### Document Creation Order
 
-1. **Glossary first** - You'll reference it everywhere
-2. **Main Overview** - Creates the map
-3. **Product Overviews** - Establish the "why"
-4. **Codebase Overviews** - Explain the "how"
-5. **Specialized docs** - Build system, testing, etc.
-6. **Technology Mapping** - Synthesize across areas
+1. **Glossary first** — You'll reference it everywhere
+2. **Main Overview** — Creates the map
+3. **Product Overviews** — Establish the "why"
+4. **Codebase Overviews** — Explain the "how"
+5. **Specialized docs** — Build system, testing, etc.
+6. **Technology Mapping** — Synthesize across areas
 
 ### Writing Guidelines
 
@@ -262,13 +270,13 @@ Not all codebases are the same. Here's how to adapt:
 
 Different codebase types have different organizational patterns. Adapt terminology accordingly:
 
-| Archetype | "Component" Means | "Flow" Means | Example Codebases |
-|-----------|-------------------|--------------|-------------------|
-| **Service-Oriented** | Services, APIs, microservices | HTTP/RPC request through services | Kubernetes, Databricks, Stripe |
-| **Library/SDK** | Assemblies, packages, modules | API call through layers | Roslyn, React, NumPy |
-| **Compiler/Toolchain** | Pipeline stages, passes | Source → IR → Output | LLVM, GCC, Babel |
-| **Monolithic App** | Modules, subsystems | User action → handler → DB | WordPress, Rails apps |
-| **Data Platform** | Pipelines, jobs, transforms | Data ingestion → processing → output | Airflow, dbt, Spark |
+| Archetype              | "Component" Means              | "Flow" Means                         | Example Codebases           |
+|------------------------|--------------------------------|--------------------------------------|-----------------------------|
+| **Service-Oriented**   | Services, APIs, microservices  | HTTP/RPC request through services    | Kubernetes, Databricks      |
+| **Library/SDK**        | Assemblies, packages, modules  | API call through layers              | Roslyn, React, NumPy        |
+| **Compiler/Toolchain** | Pipeline stages, passes        | Source → IR → Output                 | LLVM, GCC, Babel            |
+| **Monolithic App**     | Modules, subsystems            | User action → handler → DB           | WordPress, Rails apps       |
+| **Data Platform**      | Pipelines, jobs, transforms    | Data ingestion → processing → output | Airflow, dbt, Spark         |
 
 **For Service-Oriented Codebases:**
 - Focus on service boundaries, protocols, deployment
@@ -334,14 +342,14 @@ Different codebase types have different organizational patterns. Adapt terminolo
 
 ### Document Length Guidelines
 
-| Document Type | Target Length |
-|---------------|---------------|
-| Main Overview | 800-1200 lines |
-| Product Overview | 200-300 lines |
-| Codebase Overview | 250-400 lines |
-| Glossary | Varies (comprehensive) |
-| Technology Mapping | 150-250 lines |
-| Specialized Overviews | 400-800 lines |
+| Document Type        | Target Length |
+|----------------------|---------------|
+| Main Overview        | 800-1200 lines|
+| Product Overview     | 200-300 lines |
+| Codebase Overview    | 250-400 lines |
+| Glossary             | Varies        |
+| Technology Mapping   | 150-250 lines |
+| Specialized Overviews| 400-800 lines |
 
 ### Must-Have Elements
 
@@ -383,14 +391,14 @@ When a user asks you to explore a codebase:
 
 The following templates are available in the `/templates` folder:
 
-- `main_overview.md` - Entry point document
-- `product_overview.md` - Per-area product context with story
-- `codebase_overview.md` - Per-area technical architecture
-- `glossary.md` - Internal terminology
-- `technology_mapping.md` - Tech usage across the codebase
-- `build_system_overview.md` - Build infrastructure
-- `test_infrastructure_overview.md` - Testing infrastructure
-- `component_catalog.md` - Quick-reference component list
-- `request_flow.md` - End-to-end request tracing
+- `main_overview.md` — Entry point document
+- `product_overview.md` — Per-area product context with story
+- `codebase_overview.md` — Per-area technical architecture
+- `glossary.md` — Internal terminology
+- `technology_mapping.md` — Tech usage across the codebase
+- `build_system_overview.md` — Build infrastructure
+- `test_infrastructure_overview.md` — Testing infrastructure
+- `component_catalog.md` — Quick-reference component list
+- `request_flow.md` — End-to-end request/data tracing
 
 Fetch and read these templates before generating documentation.

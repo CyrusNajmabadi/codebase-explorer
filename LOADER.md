@@ -53,6 +53,32 @@ The AI agent will ask you to paste templates as needed, or will adapt the standa
 
 ---
 
+## Alternative: Expanding Existing Documentation
+
+If documentation was already created (by a previous session or another person) and you want to drill deeper into a
+specific area:
+
+```
+I have a codebase with existing AI-generated documentation that I'd like to expand.
+
+Please fetch the exploration methodology from:
+https://raw.githubusercontent.com/[YOUR_USERNAME]/codebase-explorer/main/README.md
+
+Codebase location: [PATH_OR_URL]
+Existing documentation: [PATH_TO_DOCS_FOLDER]
+
+Please start by reading the existing Main Overview and Glossary to understand what's already documented.
+Then I'd like to drill deeper into: [SPECIFIC_AREA - e.g., "the authentication system" or "the parser component"]
+```
+
+The agent should:
+1. Read existing docs to understand the current state
+2. Explore the specified area in more depth
+3. Create detailed documentation that links to/from existing docs
+4. Update existing docs with links to the new detailed docs
+
+---
+
 ## Required AI Capabilities
 
 This methodology works best with AI agents that can:

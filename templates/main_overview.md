@@ -94,6 +94,28 @@ This template provides the structure for the entry-point document that maps the 
 
 ---
 
+## Documentation Status
+
+[Track what's documented and what could be expanded. Update as documentation grows.]
+
+### Documented Areas
+
+| Area | Product Overview | Codebase Overview | Flow Docs | Detail Level |
+|------|------------------|-------------------|-----------|--------------|
+| [AREA_1] | ✓ | ✓ | — | High-level |
+| [AREA_2] | ✓ | ✓ | ✓ | Detailed |
+| [AREA_3] | ✓ | — | — | Overview only |
+
+### Areas for Future Documentation
+
+[List areas that would benefit from deeper documentation]
+
+- **[AREA_X]** — Complex subsystem; would benefit from detailed flow docs
+- **[AREA_Y]** — Has many internal components; could use component-level docs
+- **[SPECIFIC_FLOW]** — Important operation; deserves its own flow doc
+
+---
+
 ## Related Documents
 
 - [Glossary](./glossary.md) — All internal terms and acronyms
@@ -115,3 +137,6 @@ This template provides the structure for the entry-point document that maps the 
 4. **Keep the Table of Contents updated** — It's how people navigate.
 
 5. **Link generously** — This is a hub document; its value is in connecting to details.
+
+6. **Maintain the Documentation Status section** — This helps future sessions know what exists and what could be
+   expanded. Update it whenever you add new docs.

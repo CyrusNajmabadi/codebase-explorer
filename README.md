@@ -109,7 +109,7 @@ Before deep exploration, ask the user:
 1. **Context:** "What is this codebase for? What does the product/company do?"
 2. **Focus areas:** "Are there specific areas you care most about?"
 3. **Your role:** "What will you be working on? (e.g., backend, ML, infra)"
-4. **Known pain points:** "Are there areas that are particularly confusing or poorly documented?"
+4. **Known trouble spots:** "Are there areas that are particularly confusing or poorly documented?"
 5. **Output location:** "Where should I save the documentation?"
 
 If the user can't answer these, that's fine—proceed with exploration and infer what you can.
@@ -335,6 +335,77 @@ Different codebase types have different organizational patterns. Adapt terminolo
 - Note gaps and outdated sections
 - Augment rather than replace
 - Reference existing docs where appropriate
+
+---
+
+## Incremental Documentation Workflow
+
+Documentation doesn't need to be completed in one session. The recommended approach is iterative:
+
+### Phase 1: Initial High-Level Pass
+
+Create the foundation:
+- Main Overview (map of everything)
+- Glossary (terms you encounter)
+- Product Overviews for major areas (why they exist)
+- High-level Codebase Overviews (architecture, not implementation details)
+
+**Leave expansion points:** When you identify areas that deserve more detail, note them explicitly:
+- "For detailed compilation flow, see [Compilation Flow](./flows/compilation.md)" (even if that doc doesn't exist yet)
+- Include a "## Areas for Future Documentation" section listing what could be expanded
+
+### Phase 2+: Expand on Demand
+
+When a user returns (same session or new session) and asks to drill into an area:
+
+1. **Read existing documentation first** — Understand what's already documented
+2. **Identify the expansion point** — What specific area needs more detail?
+3. **Create detailed docs that link back** — New docs should reference the high-level docs they expand on
+4. **Update the parent docs** — Add links from high-level docs to the new detailed docs
+
+### Handling "Expand This Area" Requests
+
+When asked to go deeper on an area with existing high-level docs:
+
+```
+User: "I need to understand the auth system in more detail"
+
+Agent should:
+1. Read existing auth-related docs (product overview, codebase overview)
+2. Explore the auth code more deeply than the initial pass
+3. Create:
+   - Detailed component docs for auth subsystems
+   - Flow docs for key auth operations (login, token refresh, etc.)
+   - Expanded glossary entries for auth-specific terms
+4. Update existing docs to link to new detailed docs
+```
+
+### Structuring Docs for Later Expansion
+
+**In high-level docs, include:**
+- "This section covers [X] at a high level. For implementation details, see [link]." (placeholder for future)
+- Clear boundaries: "The auth system includes token management, session handling, and SSO integration."
+- Named subsystems that can become their own docs later
+
+**Cross-reference pattern:**
+```
+Main Overview
+├── links to → Area Product Overview
+│   └── links to → Area Codebase Overview
+│       └── links to → Component Detail Doc (created later)
+│           └── links to → Flow Doc (created later)
+```
+
+### Starting a "Drill Deeper" Session
+
+When beginning work on a codebase that already has AI-generated documentation:
+
+1. **Read the existing Main Overview** — Understand the current documentation structure
+2. **Check what exists** — List the documentation directory to see what's documented
+3. **Ask the user** — "I see documentation exists for [areas]. Which area would you like me to expand?"
+4. **Read relevant existing docs** — Before exploring code, understand what's already captured
+5. **Explore and expand** — Go deeper on the requested area
+6. **Maintain consistency** — Use the same terminology, structure, and style as existing docs
 
 ---
 

@@ -1,35 +1,52 @@
 # Codebase Explorer - Loader Prompts
 
-This file contains prompts to start AI agent sessions for codebase exploration. There are three main scenarios:
+This file contains prompts to start AI agent sessions for codebase exploration:
 1. **Initial exploration** — First time exploring a codebase
-2. **Expanding documentation** — Drilling deeper into an area that already has high-level docs
-3. **Verification** — Deeply auditing existing documentation against current code
+2. **Expanding documentation** — Drilling deeper into an area with existing docs
+3. **Verification** — Auditing existing documentation against current code
 
 ---
 
-## Initial Exploration Prompt
+## Core Philosophy
 
-Copy and paste this into a new AI agent session to begin exploring an unfamiliar codebase.
+All prompts in this file share the same philosophy:
+
+**Living Documents**: This documentation should be a living, accurate representation of the codebase. Drift between docs and code is a failure state.
+
+**Deep Verification**: Never do cursory checks or surface-level reviews. Read actual source code. Verify every significant claim. Don't trust git diffs as your only signal — diffs show what lines changed, not whether docs are accurate.
+
+**Thoroughness Over Speed**: Be extremely thorough. Read the code. Trace data flows. Verify architectural claims against implementation. Use subagents to parallelize work across independent areas.
+
+---
+
+## Fetching the Methodology
+
+All prompts require fetching the methodology. Use this block (replacing `[YOUR_USERNAME]`):
 
 ```
-I need your help understanding a complex codebase I'm unfamiliar with.
-
 Please fetch the exploration methodology and templates from:
 https://raw.githubusercontent.com/[YOUR_USERNAME]/codebase-explorer/main/
 
 Specifically, fetch:
 - README.md (the main methodology)
-- LOADER.md (this file - so you know how to reference it in generated docs)
+- LOADER.md (this file)
 - All templates from /templates/:
-  - main_overview.md
-  - product_overview.md
-  - codebase_overview.md
-  - glossary.md
-  - technology_mapping.md
-  - build_system_overview.md
-  - test_infrastructure_overview.md
-  - component_catalog.md
-  - request_flow.md
+  - main_overview.md, product_overview.md, codebase_overview.md
+  - glossary.md, technology_mapping.md
+  - build_system_overview.md, test_infrastructure_overview.md
+  - component_catalog.md, request_flow.md
+```
+
+---
+
+## Initial Exploration Prompt
+
+Use this for first-time exploration of an unfamiliar codebase.
+
+```
+I need your help understanding a complex codebase I'm unfamiliar with.
+
+[FETCH METHODOLOGY - see "Fetching the Methodology" section above]
 
 Once loaded, begin exploring:
 
@@ -40,135 +57,77 @@ Methodology location: [URL_TO_THIS_REPO - so generated docs can reference it]
 Any specific areas I care about: [OPTIONAL - e.g., "backend services" or "the ML pipeline"]
 ```
 
-### Usage Notes
-
-1. Replace `[YOUR_USERNAME]` with your GitHub username (or org name)
-2. Replace `[PATH_OR_URL]` with the codebase path (local) or repo URL
-3. Replace `[WHERE_TO_SAVE_DOCS]` with where you want documentation saved
-4. Replace `[URL_TO_THIS_REPO]` with the GitHub URL (e.g., `https://github.com/yourname/codebase-explorer`)
-5. The "specific areas" field is optional but helps prioritize
+**Usage Notes:**
+- Replace `[PATH_OR_URL]` with the codebase path (local) or repo URL
+- Replace `[WHERE_TO_SAVE_DOCS]` with where you want documentation saved
+- Replace `[URL_TO_THIS_REPO]` with the GitHub URL to this methodology repo
+- The "specific areas" field is optional but helps prioritize
 
 ---
 
 ## Expanding Documentation Prompt
 
-Use this when documentation already exists (from a previous session) and you want to drill deeper into a specific
-area, or when code has changed and documentation needs updating.
-
-**Philosophy: Living Documents**
-
-This documentation is meant to be a living, accurate representation of the codebase. When you run this prompt:
-- You are not doing a cursory check or surface-level review
-- You are deeply verifying that all existing documentation remains accurate
-- You have hours to run — use them to be thorough
-- Every claim in the docs should be verified against actual code
-- Significant drift between docs and code is a failure state
+Use this when documentation already exists and you want to:
+- Drill deeper into a specific area
+- Update documentation after code changes
+- Fill in gaps in existing coverage
 
 ```
 I have a codebase with existing AI-generated documentation that I'd like to expand and verify.
 
-Please fetch the exploration methodology and templates from:
-https://raw.githubusercontent.com/[YOUR_USERNAME]/codebase-explorer/main/
-
-Specifically, fetch:
-- README.md (the main methodology)
-- LOADER.md (for reference)
-- All templates from /templates/
+[FETCH METHODOLOGY - see "Fetching the Methodology" section above]
 
 Then:
 1. Read the existing documentation at: [PATH_TO_DOCS_FOLDER]
 2. Note the Git SHA recorded in the existing docs
-3. Check what changed in the codebase since the docs were generated (if this is a git repo)
-4. Start with the Main Overview and Glossary to understand what's already documented
-5. I'd like to drill deeper into: [SPECIFIC_AREA - e.g., "the parser component" or "authentication flow"]
+3. Check what changed in the codebase since then (if git repo)
+4. Start with the Main Overview and Glossary to understand current state
+5. I'd like to drill deeper into: [SPECIFIC_AREA - e.g., "the parser component"]
 
-IMPORTANT: This is not a surface-level update. You should:
-- Deeply verify ALL existing documentation in this area still matches the code
-- Read the actual source files, not just git diffs
-- Check that architectural descriptions, data flows, and concepts are still accurate
-- Update anything that has drifted, even if the git diff doesn't obviously show it
-- You have hours to run — be thorough
-
-Please create detailed documentation for that area, linking back to the existing high-level docs.
+IMPORTANT: This is not a surface-level update. Deeply verify ALL existing documentation
+in this area still matches the code. Read actual source files. Update anything that has
+drifted, even if git diffs don't obviously show it.
 ```
 
 ### What the Agent Should Do
 
-1. Fetch and read the methodology (README.md) and templates
-2. Read existing documentation to understand current state and **note the Git SHA recorded in the docs**
-3. **Deeply verify existing documentation** (this is critical):
-   - Don't just look at git diffs — read the actual source code
-   - For each major concept or architectural claim in the docs, verify it's still true
-   - Check that data flows, component relationships, and interfaces are accurately described
-   - Verify that terminology and internal names haven't changed
+1. Read existing docs and **note the Git SHA recorded**
+2. **Deeply verify existing documentation**:
+   - Read actual source code, not just git diffs
+   - For each architectural claim, verify it's still true
+   - Check data flows, component relationships, interfaces
+   - Verify terminology and internal names haven't changed
    - Look for subtle drift: code that evolved while docs stayed static
-4. **Check what changed since last documentation** (if git repo):
-   - Get current SHA: `git rev-parse HEAD`
-   - Compare to SHA in docs: `git diff --stat OLD_SHA..HEAD -- path/to/area/`
-   - But don't rely solely on diffs — diffs show what lines changed, not whether docs are accurate
-   - A file with no changes might still have docs that were always slightly wrong
-5. **Update all inaccuracies**, whether caused by:
-   - Code changes since the docs were written
-   - Original documentation that was incomplete or imprecise
-   - Terminology or naming that has evolved
-6. Explore the specified area in more depth than the initial pass
-7. Create detailed documentation following the same methodology
-8. Update existing docs with links to the new detailed docs
-9. Ensure new docs link back to their parent high-level docs
-10. **Record the new Git SHA** in all new/updated documents
-
-### Time Expectations
-
-This process should take hours, not minutes. A thorough expansion pass involves:
-- Reading hundreds or thousands of lines of source code
-- Tracing data flows through multiple files
-- Verifying each architectural claim against actual implementation
-- Running subagents in parallel to explore different aspects
-
-If you're finishing in under an hour, you're probably not being thorough enough.
+3. **Update all inaccuracies**, whether from:
+   - Code changes since docs were written
+   - Original documentation that was incomplete
+   - Terminology that has evolved
+4. Explore the specified area in more depth
+5. Create detailed documentation following the methodology
+6. Update existing docs with links to new detailed docs
+7. **Record the new Git SHA** in all new/updated documents
 
 ---
 
 ## Verification Agent Prompt
 
-Use this when you want an independent agent — with no prior context — to deeply audit existing documentation
-against the current codebase. This is not a spot-check; it's a thorough verification that everything documented
-accurately reflects reality.
+Use this when you want an independent agent — with no prior context — to audit existing
+documentation against the current codebase.
 
-**When to Use This**
-
-- After significant codebase changes (major refactors, new versions)
-- Periodically (monthly/quarterly) to catch drift
+**When to Use:**
+- After major codebase changes (refactors, new versions)
+- Periodically to catch drift
 - When onboarding to documentation created by others
-- When you suspect docs may have become stale
 - Before relying on docs for critical decisions
-
-**Philosophy**
-
-The verification agent operates as an auditor. It assumes nothing about the documentation's accuracy and
-verifies every significant claim against actual code. This agent should:
-- Start fresh with no assumptions
-- Read source code directly, not rely on summaries
-- Question whether each documented concept, flow, or architecture matches implementation
-- Identify subtle inaccuracies that might mislead readers
-- Spend hours being thorough — this is deep work
 
 ```
 I need you to perform a deep verification audit of existing codebase documentation.
 
 CONTEXT:
-A previous AI agent explored a codebase and generated documentation following the Codebase Explorer
-methodology. Your job is to verify that documentation is accurate — not as a cursory check, but as a
-thorough audit that reads actual source code.
+A previous AI agent explored a codebase and generated documentation following the
+Codebase Explorer methodology. Your job is to verify that documentation is accurate.
 
-METHODOLOGY:
-Please fetch the exploration methodology from:
-https://raw.githubusercontent.com/[YOUR_USERNAME]/codebase-explorer/main/
-
-Specifically, fetch:
-- README.md (the methodology the original agent followed)
-- LOADER.md (this file, for context on the verification process)
-- All templates from /templates/ (to understand document structure)
+[FETCH METHODOLOGY - see "Fetching the Methodology" section above]
 
 WHAT TO VERIFY:
 - Codebase location: [PATH_OR_URL]
@@ -178,7 +137,8 @@ WHAT TO VERIFY:
 YOUR TASK:
 
 1. Read the existing documentation completely
-2. For EACH significant claim in the documentation:
+
+2. For EACH significant claim:
    - Locate the relevant source code
    - Read and understand the actual implementation
    - Verify the claim is accurate and complete
@@ -189,7 +149,7 @@ YOUR TASK:
    - Data flows described actually work that way
    - Component relationships are correctly documented
    - Internal terminology and names are current
-   - Code examples (if any) are syntactically correct and functional
+   - Code examples (if any) are correct and functional
    - Cross-references between docs are valid
 
 4. Check for drift patterns:
@@ -198,53 +158,39 @@ YOUR TASK:
    - Features removed that are still documented
    - Subtle behavioral changes not reflected in docs
 
-5. Produce a verification report:
-   - What was verified and found accurate
-   - What discrepancies were found (with specifics)
-   - What documentation needs updating
-   - What areas need deeper exploration
+5. Produce a verification report (see template below)
 
 6. If authorized, fix the documentation directly
 
-IMPORTANT:
-- You have HOURS to complete this. Be thorough.
-- Don't trust git diffs as your only signal — read the actual code
-- Small inaccuracies matter; they compound into misleading documentation
-- If something seems off, investigate deeply rather than assuming it's fine
-- Use subagents to parallelize verification of independent areas
+Be extremely thorough. Small inaccuracies compound into misleading documentation.
+If something seems off, investigate deeply rather than assuming it's fine.
 ```
 
 ### Verification Checklist
 
-The agent should verify each document type:
-
 **Main Overview**
 - [ ] Area categorization still makes sense
-- [ ] All listed areas still exist and are correctly described
+- [ ] All listed areas exist and are correctly described
 - [ ] Technology stack is current
-- [ ] Architecture diagram (if any) matches reality
 
 **Product Overviews**
-- [ ] User stories reflect actual product capabilities
 - [ ] Features listed are actually implemented
 - [ ] Architecture descriptions match code
-- [ ] "What's NOT covered here" sections are accurate
+- [ ] "What's NOT covered" sections are accurate
 
 **Codebase Overviews**
 - [ ] Directory structure matches actual structure
-- [ ] Key files listed actually exist and do what's described
-- [ ] Component interactions are correctly documented
-- [ ] Internal terminology matches what's in code
+- [ ] Key files exist and do what's described
+- [ ] Component interactions are correct
+- [ ] Internal terminology matches code
 
 **Glossary**
-- [ ] All terms are still used in the codebase
+- [ ] All terms are still used
 - [ ] Definitions match actual usage
-- [ ] No significant terms are missing
-- [ ] Cross-references are valid
+- [ ] No significant terms missing
 
 **Technology Mapping**
 - [ ] Technologies listed are still in use
-- [ ] Version numbers are current
 - [ ] Purposes described match actual usage
 
 ### Verification Report Template
@@ -258,45 +204,40 @@ The agent should verify each document type:
 | **Git SHA** | `[CURRENT_SHA]` |
 | **Docs SHA** | `[SHA_FROM_DOCS]` |
 | **Area** | [AREA_VERIFIED] |
-| **Verifier** | AI Agent (Codebase Explorer methodology) |
 
 ## Summary
 
 - **Documents verified**: [COUNT]
-- **Accuracy rate**: [PERCENTAGE - claims verified as accurate]
 - **Issues found**: [COUNT]
 - **Severity**: [CRITICAL/MODERATE/MINOR]
 
 ## Verified as Accurate
 
-[List major claims that were verified and found correct]
+[List major claims verified correct]
 
 ## Discrepancies Found
 
-### [Issue 1 Title]
+### [Issue Title]
 - **Document**: [path/to/doc.md]
 - **Claim**: "[What the doc says]"
 - **Reality**: "[What the code actually does]"
 - **Severity**: [CRITICAL/MODERATE/MINOR]
 - **Fix**: [What should change]
 
-### [Issue 2 Title]
-...
-
 ## Recommendations
 
-[Overall recommendations for documentation maintenance]
+[Overall recommendations]
 
 ## Files Examined
 
-[List of source files that were read during verification]
+[List of source files read during verification]
 ```
 
 ---
 
 ## Alternative: No Network Access
 
-If the AI agent can't fetch from GitHub, paste the README.md contents directly, then say:
+If the agent can't fetch from GitHub, paste README.md contents directly, then say:
 
 ```
 I've pasted the methodology above. The templates are in the /templates folder of the same repo.
@@ -305,25 +246,13 @@ The methodology repo is at: [URL_TO_THIS_REPO]
 Please proceed with exploring [CODEBASE_PATH] and save documentation to [OUTPUT_PATH].
 ```
 
-The agent will ask you to paste templates as needed.
-
 ---
 
 ## What Generated Docs Should Include
 
-When generating documentation, the agent should include references to this methodology so users know how to expand
-and verify it later. Specifically, generated docs should:
+Generated docs should reference this methodology so users know how to expand/verify later:
 
-1. **In the Main Overview's "Documentation Scope" section:**
-   - Link to this LOADER.md file (the "Expanding Documentation Prompt" section)
-   - Explain that users can start a new AI session with that prompt to drill deeper
-   - Mention that verification agents can audit documentation accuracy
-
-2. **In each area's "Documentation Scope" section:**
-   - Note that this is high-level documentation
-   - Point to LOADER.md for instructions on how to expand or verify docs
-
-Example text for generated docs:
+**In each "Documentation Scope" section:**
 ```markdown
 ## Documentation Scope
 
@@ -341,8 +270,8 @@ This methodology works best with AI agents that can:
 - **Search/grep** through code
 - **Write files** to create documentation
 - **Execute commands** (optional, for build system exploration)
-- **Parallel execution** (optional but faster, for exploring multiple areas simultaneously)
+- **Parallel execution** (optional but faster)
 - **Fetch URLs** (optional, for loading templates from GitHub)
-- **Web search** (optional, for looking up unfamiliar technologies and frameworks)
+- **Web search** (optional, for enriching documentation with links to official docs, technology sites, Wikipedia, etc. — use judiciously where links genuinely help readers)
 
-Most modern AI coding assistants (in IDEs or standalone) support these capabilities.
+Most modern AI coding assistants support these capabilities.

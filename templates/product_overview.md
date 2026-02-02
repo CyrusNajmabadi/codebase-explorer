@@ -122,6 +122,39 @@ For detailed architecture, see [Codebase Overview](./codebase_overview.md).
 
 ---
 
+## Internal Resources (Optional)
+
+<!-- 
+AGENT INSTRUCTIONS: This section is OPTIONAL. Include it only if you can discover 
+high-value internal resources using MCP servers or similar tools. Remove this entire 
+section if no relevant resources are found or if the area is too broad for specific links.
+
+Use subagents with MCP servers that connect to extra-code resources (Confluence, Slack, 
+Jira, Glean, Google Drive, etc.) to discover:
+- Primary Slack channel(s) for this team/area
+- Main intranet/wiki page (go/ links, Confluence space)
+- Critical email aliases (team distribution lists, oncall)
+- Top-level Jira project or board
+- Shared documentation folders
+- Oncall/escalation information
+
+Include ONLY high-value "hub" links that themselves contain many useful resources.
+Do NOT be exhaustive — 3-6 links maximum. If you can't find relevant resources, 
+delete this section entirely.
+-->
+
+**Primary Resources:**
+
+| Resource | Description |
+|----------|-------------|
+| [go/AREA_NAME](URL) | Main documentation hub |
+| `#slack-channel` | Primary support channel |
+| [JIRA_PROJECT](URL) | Team's issue tracker |
+
+**Support:** [team-alias@company.com] or `#slack-channel`
+
+---
+
 ## Related Documentation
 
 - [Codebase Overview](./codebase_overview.md) — Technical architecture and components

@@ -273,5 +273,37 @@ This methodology works best with AI agents that can:
 - **Parallel execution** (optional but faster)
 - **Fetch URLs** (optional, for loading templates from GitHub)
 - **Web search** (optional, for enriching documentation with links to official docs, technology sites, Wikipedia, etc. — use judiciously where links genuinely help readers)
+- **MCP servers** (optional but valuable, for discovering internal business resources — see below)
 
 Most modern AI coding assistants support these capabilities.
+
+### Discovering Internal Resources via MCP
+
+When available, use MCP (Model Context Protocol) servers to discover internal business resources 
+that help readers navigate beyond the code. This connects technical documentation to the broader 
+organizational context.
+
+**When to use:** After completing the code exploration, use subagents with MCP servers to enrich 
+the product overview (and occasionally codebase overview) with high-value internal links.
+
+**What to search for:**
+- **Slack channels** — Primary support/discussion channel for this team or technology
+- **Intranet pages** — Main wiki/Confluence page, go/ shortlinks, team homepages
+- **Email aliases** — Team distribution lists, oncall aliases
+- **Issue trackers** — Top-level Jira project or board for this area
+- **Documentation hubs** — Shared Google Drive folders, Confluence spaces
+- **Oncall/escalation** — PagerDuty schedules, runbooks
+
+**Guidelines:**
+- Only include **high-value hub links** that themselves contain many resources
+- Limit to 3-6 links maximum — this should not be overwhelming
+- Remove the "Internal Resources" section entirely if no relevant resources are found
+- More relevant at area/subarea level; less relevant for very broad overviews
+- Use MCP servers that connect to **extra-code resources** (Confluence, Slack, Jira, Glean, 
+  Google Drive, etc.), not code-focused tools
+
+**Example search queries:**
+- "[area name] getting started" 
+- "[area name] slack channel support"
+- "[area name] FAQ troubleshooting"
+- "go/[area-name]" or "[area-name] intranet"

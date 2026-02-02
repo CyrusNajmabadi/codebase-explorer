@@ -19,6 +19,63 @@ All prompts in this file share the same philosophy:
 
 ---
 
+## Subagent Architecture
+
+**This methodology is designed around subagents.** The primary agent should act as a **coordinator**, 
+delegating substantial work to subagents that operate with their own context windows.
+
+### Why Subagents?
+
+1. **Context management** — Large codebases quickly exhaust a single agent's context window. Subagents 
+   each have fresh context, allowing deep exploration of specific areas without crowding out other work.
+
+2. **Focus** — The primary agent stays focused on coordination, synthesis, and documentation structure. 
+   Subagents focus deeply on their assigned tasks without distraction.
+
+3. **Parallelization** — Independent areas can be explored simultaneously, dramatically reducing 
+   total exploration time.
+
+4. **Isolation** — If a subagent goes down a wrong path or gets confused, it doesn't pollute the 
+   primary agent's context. Results are summarized back cleanly.
+
+### How to Use Subagents
+
+**Primary agent responsibilities:**
+- Plan the overall exploration strategy
+- Decompose work into independent tasks
+- Launch subagents for each task
+- Synthesize subagent results into coherent documentation
+- Handle cross-cutting concerns and integration
+
+**Subagent responsibilities:**
+- Deep exploration of a specific area, component, or question
+- Reading and analyzing source code within their assigned scope
+- Returning structured findings to the primary agent
+- MCP server queries (Confluence, Slack, Jira, Glean, etc.)
+
+**When to launch subagents:**
+- Exploring different areas of the codebase (e.g., "explore the auth system", "explore the data pipeline")
+- Deep-diving into specific components
+- Searching internal resources via MCP servers
+- Verifying documentation against code
+- Any task that requires substantial context and can run independently
+
+**Example pattern:**
+```
+Primary agent:
+  1. Assess codebase structure
+  2. Identify 5 major areas to explore
+  3. Launch subagents IN PARALLEL:
+     - Subagent A: "Explore the authentication system, return key components and data flows"
+     - Subagent B: "Explore the API gateway, return endpoints and middleware"
+     - Subagent C: "Search MCP servers for internal resources related to authentication"
+     - Subagent D: "Search MCP servers for internal resources related to API gateway"
+  4. Collect all subagent results
+  5. Synthesize into documentation (integrate internal links where relevant)
+```
+
+---
+
 ## Fetching the Methodology
 
 All prompts require fetching the methodology. Use this block (replacing `[YOUR_USERNAME]`):
@@ -283,8 +340,31 @@ When available, use MCP (Model Context Protocol) servers to discover internal bu
 that help readers navigate beyond the code. This connects technical documentation to the broader 
 organizational context.
 
-**When to use:** After completing the code exploration, use subagents with MCP servers to enrich 
-the product overview (and occasionally codebase overview) with high-value internal links.
+**This is a subagent task.** Launch a dedicated subagent to search MCP servers for internal resources. 
+This keeps the primary agent focused on code exploration while the subagent handles the business 
+context discovery. The subagent should return a concise summary of high-value links found.
+
+**When to use:** You can launch MCP subagents in parallel with code exploration if the area name 
+is sufficient for searching. However, if initial searches yield poor results, **re-run the MCP 
+subagent** after code exploration reveals better search terms (internal names, product names, 
+team names, key terminology). The code exploration often uncovers the vocabulary that internal 
+resources actually use.
+
+**Subagent prompt example:**
+```
+Search for internal resources related to [AREA_NAME] using MCP servers that connect to 
+extra-code resources (Confluence, Glean, Slack, Jira, Google Drive, etc.).
+
+Look for:
+- Primary Slack channel for support/discussion
+- Main intranet/wiki page (go/ links, Confluence spaces)
+- Team email aliases or oncall information  
+- Top-level Jira project or board
+- Any "getting started" or FAQ documentation
+
+Return only high-value "hub" links (3-6 maximum) that themselves contain many useful resources.
+If nothing relevant is found, say so.
+```
 
 **What to search for:**
 - **Slack channels** — Primary support/discussion channel for this team or technology
@@ -302,7 +382,7 @@ the product overview (and occasionally codebase overview) with high-value intern
 - Use MCP servers that connect to **extra-code resources** (Confluence, Slack, Jira, Glean, 
   Google Drive, etc.), not code-focused tools
 
-**Example search queries:**
+**Example search queries for the subagent:**
 - "[area name] getting started" 
 - "[area name] slack channel support"
 - "[area name] FAQ troubleshooting"

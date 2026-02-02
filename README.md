@@ -17,16 +17,21 @@ This methodology assumes the AI agent can:
 - **Write files** to create documentation
 - **List directories** to understand structure
 
-### Optional (But Helpful) Capabilities
+### Optional (But Highly Recommended) Capabilities
 
-- **Parallel execution** — Explore multiple areas simultaneously (faster, not required)
+- **Subagents** — Launch child agents with their own context windows for parallel exploration. 
+  This is the recommended approach for large codebases. See [LOADER.md](./LOADER.md) for the 
+  subagent architecture explanation.
+- **MCP servers** — Connect to internal business resources (Confluence, Slack, Jira, Glean, etc.) 
+  to discover high-value links for documentation
 - **Execute shell commands** — Useful for build system exploration
 - **Fetch URLs** — Load templates from GitHub instead of pasting
 - **Web search** — Look up unfamiliar technologies, frameworks, or patterns
 
 ### Adapting to Your AI's Capabilities
 
-- **No parallelization?** Explore areas sequentially. Takes longer but works fine.
+- **No subagents?** Explore areas sequentially. Takes longer but works fine.
+- **No MCP servers?** Skip the "Internal Resources" section in documentation.
 - **No shell access?** Skip build system command verification; focus on config files.
 - **No URL fetching?** Paste templates directly when needed.
 
@@ -213,9 +218,13 @@ Based on the initial assessment, group the codebase into 8-15 logical areas. The
 - Roughly similar scope
 - Map to how developers think about the system
 
-### Step 2.2: Parallel Deep Exploration
+### Step 2.2: Parallel Deep Exploration (via Subagents)
 
-For each area, launch a parallel exploration task (or explore sequentially if parallelization isn't available):
+**Launch subagents** for each area. Each subagent operates with its own context window, allowing 
+deep exploration without crowding the primary agent's context. The primary agent coordinates and 
+synthesizes results.
+
+For each area, launch a subagent with a prompt like:
 
 ```
 Explore the [AREA_NAME] area of this codebase.
@@ -239,11 +248,12 @@ Return:
 - Open questions
 ```
 
-**Parallelization guidance:**
-- Run 3-4 parallel explorations at a time (more may cause resource contention)
+**Subagent guidance:**
+- Run 3-4 subagents in parallel (more may cause resource contention)
 - Wait for results before launching next batch
-- Collect all findings before writing documentation
-- If parallelization isn't available, explore areas sequentially—it takes longer but works fine
+- Collect all subagent findings before writing documentation
+- If subagents aren't available, explore areas sequentially—it takes longer but works fine
+- Also launch MCP subagents in parallel to discover internal resources (see LOADER.md)
 
 **When to search the web:**
 - You encounter a framework, library, or tool you're unfamiliar with
@@ -594,7 +604,7 @@ When a user asks you to explore a codebase:
    how to expand documentation later
 3. **Run initial assessment** (Phase 1)
 4. **Ask clarifying questions** if needed
-5. **Launch parallel exploration** (Phase 2)
+5. **Launch subagents for exploration** (Phase 2) — Code exploration + MCP resource discovery in parallel
 6. **Synthesize and document** (Phase 3) — Replace `[METHODOLOGY_URL]` placeholders with the actual URL
 7. **Verify** (Phase 4)
 8. **Deliver** with a summary of what you created and how to expand it

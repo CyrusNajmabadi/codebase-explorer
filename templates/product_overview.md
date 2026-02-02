@@ -126,11 +126,13 @@ For detailed architecture, see [Codebase Overview](./codebase_overview.md).
 
 <!-- 
 AGENT INSTRUCTIONS: This section is OPTIONAL. Include it only if you can discover 
-high-value internal resources using MCP servers or similar tools. Remove this entire 
-section if no relevant resources are found or if the area is too broad for specific links.
+high-value internal resources. Remove this entire section if no relevant resources 
+are found or if the area is too broad for specific links.
 
-Use subagents with MCP servers that connect to extra-code resources (Confluence, Slack, 
-Jira, Glean, Google Drive, etc.) to discover:
+**This is a SUBAGENT task.** Launch a dedicated subagent to search MCP servers for internal 
+resources. The subagent should use MCP servers that connect to extra-code resources 
+(Confluence, Slack, Jira, Glean, Google Drive, etc.) to discover:
+
 - Primary Slack channel(s) for this team/area
 - Main intranet/wiki page (go/ links, Confluence space)
 - Critical email aliases (team distribution lists, oncall)
@@ -139,7 +141,7 @@ Jira, Glean, Google Drive, etc.) to discover:
 - Oncall/escalation information
 
 Include ONLY high-value "hub" links that themselves contain many useful resources.
-Do NOT be exhaustive — 3-6 links maximum. If you can't find relevant resources, 
+Do NOT be exhaustive — 3-6 links maximum. If the subagent finds nothing relevant, 
 delete this section entirely.
 -->
 
